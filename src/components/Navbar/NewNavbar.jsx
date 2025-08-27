@@ -99,6 +99,7 @@ const HomeHeroSection = () => {
         {/* Mobile Links */}
         <Nav className="flex-column text-start mt-5 ps-3">
           <Nav.Link as={Link} to="/" onClick={() => setMenuOpen(false)} className="text-white">Home</Nav.Link>
+          <Nav.Link as={Link} to="/category" onClick={() => setMenuOpen(false)} className="text-white">Tattoo Category</Nav.Link>
           <Nav.Link as={Link} to="/appointment" onClick={() => setMenuOpen(false)} className="text-white">Appointment</Nav.Link>
           <Nav.Link as={Link} to="/academy" onClick={() => setMenuOpen(false)} className="text-white">Academy</Nav.Link>
           <Nav.Link as={Link} to="/prices" onClick={() => setMenuOpen(false)} className="text-white">Prices</Nav.Link>
