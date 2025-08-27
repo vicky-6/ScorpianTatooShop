@@ -1,0 +1,39 @@
+.custom-navbar {
+  background: #111;
+  padding: 0.8rem 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+.brand-text {
+  font-weight: bold;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+}
+
+.brand-name {
+  margin-left: 6px;
+  background: linear-gradient(45deg, #ff0057, #ff7b00, #ffe600, #00ff95, #00c3ff, #9c4dff, #ff00d4);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 8s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.nav-links .nav-link {
+  font-size: 0.95rem;
+  margin: 5px 10px;
+  transition: all 0.3s ease;
+  color: #ddd !important;
+}
+
+.nav-links .nav-link:hover {
+  color: #ff0057 !important;
+  transform: scale(1.05);
+}
