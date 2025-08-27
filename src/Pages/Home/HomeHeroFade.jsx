@@ -3,14 +3,14 @@ import { Button } from "react-bootstrap";
 
 const HomeHeroSection = () => {
   const images = [
-    "/HeroImage.png",
-    "/tattoo2.jpg",
-    "/tattoo3.jpg",
-    "/tattoo4.jpg",
-    "/tattoo1.jpg",
-//     "/HeroImage.png",
-//     "/HeroImage.png",
-//     "/HeroImage.png",
+    "/scorpian.JPG",
+    "/nirmalinsta.JPG",
+    "/orginal1.JPG",
+    "/original2.JPG",
+    "/original3.JPG",
+    "/nirmalinst3.JPG",
+    "/original4.JPG",
+    "/original5.JPG",
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);

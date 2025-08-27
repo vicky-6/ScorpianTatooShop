@@ -4,7 +4,7 @@ import { Container, Row, Col, Button, Image } from 'react-bootstrap';
 const AppointmentHero = () => {
   return (
     <Container fluid className="py-5 bg-light">
-      <Row className="align-items-center flex-wrap-reverse">
+      <Row className="align-items-center flex-wrap-reverse py-5">
         {/* Left Content */}
         <Col md={6} className="text-center text-md-start px-4">
           <h1 className="display-4 fw-bold mb-4 text-primary">
@@ -22,7 +22,7 @@ const AppointmentHero = () => {
         <Col md={6} className="position-relative d-flex justify-content-center mb-4 mb-md-0">
           {/* Main Image */}
           <Image
-            src="https://images.unsplash.com/photo-1615651325174-2d4b7e7f2e0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            src="/offer.JPG"
             alt="Mobile App"
             fluid
             className="rounded shadow"

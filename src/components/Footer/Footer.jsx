@@ -77,7 +77,7 @@ const Footer = () => {
             lg={4}
             style={styles.footerCol}
           >
-            <h5 style={styles.footerLogo}><i class="bi bi-arrow-through-heart"></i> Scorpian Tattoo</h5>
+            <h5 style={styles.footerLogo}><i className="bi bi-arrow-through-heart"></i> Scorpian Tattoo</h5>
 
             {/* Mobile: collapsible */}
             <div className="d-lg-none">

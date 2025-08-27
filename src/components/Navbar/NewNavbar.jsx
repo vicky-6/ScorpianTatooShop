@@ -56,10 +56,11 @@ const HomeHeroSection = () => {
           {/* Desktop nav */}
           <Nav className="ms-auto d-none d-lg-flex">
             <Nav.Link as={Link} to="/" className={navbarBg ? "text-white" : "text-dark"}>Home</Nav.Link>
+            <Nav.Link as={Link} to="/category" className={navbarBg ? "text-white" : "text-dark"}>Tattoo Category</Nav.Link>
             <Nav.Link as={Link} to="/appointment" className={navbarBg ? "text-white" : "text-dark"}>Appointment</Nav.Link>
             <Nav.Link as={Link} to="/academy" className={navbarBg ? "text-white" : "text-dark"}>Academy</Nav.Link>
             <Nav.Link as={Link} to="/prices" className={navbarBg ? "text-white" : "text-dark"}>Prices</Nav.Link>
-            <Nav.Link as={Link} to="/contact" className={navbarBg ? "text-white" : "text-dark"}>Contact Us</Nav.Link>
+            
           </Nav>
         </Container>
       </Navbar>
