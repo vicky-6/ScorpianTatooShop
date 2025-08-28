@@ -3,10 +3,14 @@ import { Container, Row, Col, Button, Image } from 'react-bootstrap';
 
 const AppointmentHero = () => {
   return (
-    <Container fluid className="py-5 bg-light">
+    <Container fluid className="py-5 bg-light overflow-hidden">
       <Row className="align-items-center flex-wrap-reverse py-5">
         {/* Left Content */}
-        <Col md={6} className="text-center text-md-start px-4">
+        <Col
+          xs={12}
+          md={6}
+          className="text-center text-md-start px-4 mb-4 mb-md-0"
+        >
           <h1 className="display-4 fw-bold mb-4 text-primary">
             Get Inked & Save Big!
           </h1>
@@ -18,12 +22,16 @@ const AppointmentHero = () => {
           </Button>
         </Col>
 
-        {/* Right Image & Icons */}
-        <Col md={6} className="position-relative d-flex justify-content-center mb-4 mb-md-0">
+        {/* Right Image & Overlay Icons */}
+        <Col
+          xs={12}
+          md={6}
+          className="position-relative d-flex justify-content-center"
+        >
           {/* Main Image */}
           <Image
             src="/offer.JPG"
-            alt="Mobile App"
+            alt="Offer"
             fluid
             className="rounded shadow"
             style={{ maxWidth: '400px' }}
@@ -31,13 +39,10 @@ const AppointmentHero = () => {
 
           {/* Overlay Icons */}
           <div
-            className="position-absolute"
+            className="position-absolute d-flex flex-column gap-3"
             style={{
               top: '10%',
-              right: '-10%',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '15px',
+              right: '0',
             }}
           >
             {/* Example Icon Button */}
@@ -46,9 +51,23 @@ const AppointmentHero = () => {
               className="rounded-circle shadow"
               style={{ padding: '10px', minWidth: '50px' }}
             >
-              <i className="bi bi-arrow-through-heart" style={{ fontSize: '1.5rem', color: '#007bff' }}></i>
+              <i
+                className="bi bi-arrow-through-heart"
+                style={{ fontSize: '1.5rem', color: '#007bff' }}
+              ></i>
             </Button>
+
             {/* Add more icons as needed */}
+            <Button
+              variant="light"
+              className="rounded-circle shadow"
+              style={{ padding: '10px', minWidth: '50px' }}
+            >
+              <i
+                className="bi bi-star"
+                style={{ fontSize: '1.5rem', color: '#007bff' }}
+              ></i>
+            </Button>
           </div>
         </Col>
       </Row>

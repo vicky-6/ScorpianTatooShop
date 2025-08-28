@@ -47,7 +47,7 @@ const CustomNavbar = () => {
             letterSpacing: "1px",
           }}
         >
-          🦂 Scorpian Tattoo Studio
+          🦂 Scorpion Tattoo Studio
         </Navbar.Brand>
 
         {/* Hamburger Toggle (mobile) */}

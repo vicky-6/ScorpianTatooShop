@@ -13,7 +13,7 @@ const Footer = () => {
     "Realism",
   ];
 
-  const artists = ["Aarav", "Meera", "Karan", "Riya", "Zayn"];
+  const artists = ["Nirmal", "Jenith", "Karan", "Riya", "Zayn"];
 
   // State to control which list is open on mobile
   const [openList, setOpenList] = useState(null);
@@ -28,7 +28,7 @@ const Footer = () => {
       background: "#111",
       color: "#eee",
       padding: "2rem 0",
-      marginTop: "2rem",
+      // marginTop: "5rem",
     },
     footerCol: {
       marginBottom: "1.5rem",
@@ -77,7 +77,7 @@ const Footer = () => {
             lg={4}
             style={styles.footerCol}
           >
-            <h5 style={styles.footerLogo}><i className="bi bi-arrow-through-heart"></i> Scorpian Tattoo</h5>
+            <h5 style={styles.footerLogo}><i className="bi bi-arrow-through-heart"></i> Scorpion Tattoo</h5>
 
             {/* Mobile: collapsible */}
             <div className="d-lg-none">

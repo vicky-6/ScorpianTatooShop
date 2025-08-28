@@ -99,7 +99,7 @@ const Particle = styled.div`
 const CeoTalk = () => {
   return (
     <BackgroundWrapper>
-      <Row className="align-items-center flex-wrap-reverse" style={{ margin: 0 }}>
+      <Row className="align-items-center flex-wrap-reverse pt-5" style={{ margin: 0 }}>
         {/* Left Text Content */}
         <TextCol md={6}>
           <motion.div

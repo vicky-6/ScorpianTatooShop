@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Container, Row, Col, Button, Modal } from "react-bootstrap";
 import styled, { keyframes, css } from "styled-components";
+import { FaPlayCircle } from "react-icons/fa"
 
 // Sample video data (17 videos)
 const videoData = [
@@ -72,7 +73,7 @@ const VideoCard = styled.div`
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 1.5rem;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.3s;
 
@@ -134,7 +135,9 @@ const StyledModal = styled(Modal)`
 `;
 
 const Gallery = () => {
-  const [visibleCount, setVisibleCount] = useState(window.innerWidth < 768 ? 4 : 8);
+  const [visibleCount, setVisibleCount] = useState(
+    window.innerWidth < 768 ? 4 : 8
+  );
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [error, setError] = useState(false);
   const [playingVideos, setPlayingVideos] = useState({});
@@ -238,10 +241,20 @@ const Gallery = () => {
                   muted
                   playsInline
                   preload="metadata"
+                  onLoadedMetadata={(e) => {
+                    // jump to 5th frame
+                    const frameNumber = 30;
+                    const fps = 30; // change if your video has different fps
+                    e.target.currentTime = frameNumber / fps;
+                  }}
                 >
                   <source src={video.url} type="video/mp4" />
                 </video>
-                {!playingVideos[video.id] && <span className="play-icon">▶</span>}
+                {!playingVideos[video.id] && (
+                  <span className="play-icon">
+                    <FaPlayCircle size={40} color="red" />
+                  </span>
+                )}
               </VideoCard>
             </Col>
           ))}
@@ -256,13 +269,27 @@ const Gallery = () => {
         )}
 
         {/* Video Modal */}
-        <StyledModal show={!!selectedVideo} onHide={handleClose} centered size="lg">
-          <span className="close-btn" onClick={handleClose}>×</span>
+        <StyledModal
+          show={!!selectedVideo}
+          onHide={handleClose}
+          centered
+          size="lg"
+        >
+          <span className="close-btn" onClick={handleClose}>
+            ×
+          </span>
           <Modal.Body>
             {error ? (
-              <h4 style={{ color: "white", textAlign: "center" }}>Went Wrong</h4>
+              <h4 style={{ color: "white", textAlign: "center" }}>
+                Went Wrong
+              </h4>
             ) : (
-              <video controls autoPlay onError={() => setError(true)} onEnded={handleClose}>
+              <video
+                controls
+                autoPlay
+                onError={() => setError(true)}
+                onEnded={handleClose}
+              >
                 <source src={selectedVideo} type="video/mp4" />
                 Your browser does not support video.
               </video>

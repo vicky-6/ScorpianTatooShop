@@ -11,6 +11,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import PricePageMain from "./Pages/Prices/PricePageMain";
 // import NavbarModern from "./components/Navbar/ModernNavbar";
 import CustomNavbar from "./components/Navbar/SoftNavbar";
+import ContactUs from "./Pages/contacts/ContactuU";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/category" element={<Categories />} />
           <Route path="/academy" element={<AcademyPageMain />} />
           <Route path="/prices" element={<PricePageMain />} />
+          <Route path="/contact" element={<ContactUs />} />
         </Routes>
       </div>
 
