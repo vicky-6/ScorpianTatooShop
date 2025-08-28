@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Container, Row, Col, Button, Modal } from "react-bootstrap";
 import styled, { keyframes, css } from "styled-components";
 
-// Sample video data
+// Sample video data (17 videos)
 const videoData = [
   { id: 1, url: "/video1.mp4" },
   { id: 2, url: "/video2.mp4" },
@@ -14,6 +14,13 @@ const videoData = [
   { id: 8, url: "/video8.mp4" },
   { id: 9, url: "/video9.mp4" },
   { id: 10, url: "/video10.mp4" },
+  { id: 11, url: "/video11.mp4" },
+  { id: 12, url: "/video12.mp4" },
+  { id: 13, url: "/video13.mp4" },
+  { id: 14, url: "/video14.mp4" },
+  { id: 15, url: "/video15.mp4" },
+  { id: 16, url: "/video16.mp4" },
+  { id: 17, url: "/video17.mp4" },
 ];
 
 // Animations
@@ -22,15 +29,14 @@ const fadeInUp = keyframes`
   to { opacity: 1; transform: translateY(0); }
 `;
 
-const pulse = keyframes`
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); color: #ff0000; }
-  100% { transform: scale(1); }
-`;
-
 const zoomIn = keyframes`
   from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
+`;
+
+const underlineGrow = keyframes`
+  from { width: 0; }
+  to { width: 100px; }
 `;
 
 // Styled Components
@@ -44,7 +50,18 @@ const Heading = styled.h2`
   font-weight: bold;
   color: #000;
   margin-bottom: 2rem;
-  animation: ${pulse} 2s infinite ease-in-out;
+  position: relative;
+  display: inline-block;
+  animation: ${fadeInUp} 1s ease forwards;
+
+  &::after {
+    content: "";
+    display: block;
+    margin: 0.5rem auto 0;
+    height: 3px;
+    background: red;
+    animation: ${underlineGrow} 1s ease forwards;
+  }
 `;
 
 const VideoCard = styled.div`
@@ -65,8 +82,8 @@ const VideoCard = styled.div`
   ${({ isVisible, index }) =>
     isVisible &&
     css`
-      animation: ${fadeInUp} 0.8s ease forwards;
-      animation-delay: ${index * 0.15}s;
+      animation: ${fadeInUp} 0.4s ease forwards;
+      animation-delay: ${index * 0.05}s;
     `}
 
   &:hover {
@@ -78,7 +95,6 @@ const VideoCard = styled.div`
     height: 100%;
     object-fit: cover;
     display: block;
-    /* Show first frame automatically */
     preload: "metadata";
   }
 
@@ -89,7 +105,7 @@ const VideoCard = styled.div`
     transform: translate(-50%, -50%);
     font-size: 3rem;
     color: red;
-    opacity: 0.9;
+    opacity: 0.95;
     pointer-events: none;
   }
 `;
@@ -122,8 +138,8 @@ const Gallery = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [error, setError] = useState(false);
   const [playingVideos, setPlayingVideos] = useState({});
-  const videoRefs = useRef([]);
-  const cardRefs = useRef([]);
+  const videoRefs = useRef({});
+  const cardRefs = useRef({});
   const [visibleCards, setVisibleCards] = useState({});
   const galleryRef = useRef(null);
   const [galleryVisible, setGalleryVisible] = useState(false);
@@ -142,7 +158,7 @@ const Gallery = () => {
     };
   }, []);
 
-  // Observe each card
+  // Observe each card whenever visibleCount changes
   useEffect(() => {
     if (!galleryVisible) return;
 
@@ -156,20 +172,20 @@ const Gallery = () => {
       { threshold: 0.2 }
     );
 
-    cardRefs.current.forEach((card) => {
+    Object.values(cardRefs.current).forEach((card) => {
       if (card) observer.observe(card);
     });
 
     return () => {
-      cardRefs.current.forEach((card) => {
+      Object.values(cardRefs.current).forEach((card) => {
         if (card) observer.unobserve(card);
       });
     };
-  }, [galleryVisible]);
+  }, [galleryVisible, visibleCount]);
 
   const handleMore = () => {
-    const increment = window.innerWidth < 768 ? 4 : 8;
-    setVisibleCount((prev) => prev + increment);
+    const increment = window.innerWidth < 768 ? 4 : 4;
+    setVisibleCount((prev) => Math.min(prev + increment, videoData.length));
   };
 
   const handlePlay = (videoUrl) => {
@@ -182,48 +198,50 @@ const Gallery = () => {
     setError(false);
   };
 
-  const handleMouseEnter = (index) => {
-    const video = videoRefs.current[index];
+  const handleMouseEnter = (id) => {
+    const video = videoRefs.current[id];
     if (video) {
       video.play().catch(() => {});
-      setPlayingVideos((prev) => ({ ...prev, [index]: true }));
+      setPlayingVideos((prev) => ({ ...prev, [id]: true }));
     }
   };
 
-  const handleMouseLeave = (index) => {
-    const video = videoRefs.current[index];
+  const handleMouseLeave = (id) => {
+    const video = videoRefs.current[id];
     if (video) {
       video.pause();
       video.currentTime = 0;
-      setPlayingVideos((prev) => ({ ...prev, [index]: false }));
+      setPlayingVideos((prev) => ({ ...prev, [id]: false }));
     }
   };
 
   return (
     <GalleryWrapper ref={galleryRef}>
       <Container>
-        <Heading>Our Gallery</Heading>
+        <div style={{ textAlign: "center" }}>
+          <Heading>Our Gallery</Heading>
+        </div>
         <Row>
           {videoData.slice(0, visibleCount).map((video, index) => (
             <Col xs={12} md={3} key={video.id}>
               <VideoCard
-                ref={(el) => (cardRefs.current[index] = el)}
+                ref={(el) => (cardRefs.current[video.id] = el)}
                 data-id={video.id}
                 isVisible={visibleCards[video.id]}
                 index={index}
-                onMouseEnter={() => handleMouseEnter(index)}
-                onMouseLeave={() => handleMouseLeave(index)}
+                onMouseEnter={() => handleMouseEnter(video.id)}
+                onMouseLeave={() => handleMouseLeave(video.id)}
                 onClick={() => handlePlay(video.url)}
               >
                 <video
-                  ref={(el) => (videoRefs.current[index] = el)}
+                  ref={(el) => (videoRefs.current[video.id] = el)}
                   muted
                   playsInline
-                  preload="metadata"  // show first frame
+                  preload="metadata"
                 >
                   <source src={video.url} type="video/mp4" />
                 </video>
-                {!playingVideos[index] && <span className="play-icon">›</span>}
+                {!playingVideos[video.id] && <span className="play-icon">▶</span>}
               </VideoCard>
             </Col>
           ))}

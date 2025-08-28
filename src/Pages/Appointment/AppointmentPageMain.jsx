@@ -1,5 +1,5 @@
 import React from 'react'
-import BookingForm from './Appointment'
+import BookingForm from './BookingForm'
 import AppointmentHero from './AppointmentHero'
 
 const AppointmentPageMain = () => {

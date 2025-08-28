@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { FaStar } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const UsersReview = () => {
   const stats = [
-    { value: "4.8★", label: "Google Rating" },
-    { value: "1000+", label: "Google Reviews" },
-    { value: "14", label: "Years Experience" },
+    { value: 4.8, suffix: "★", label: "Google Rating", isDecimal: true },
+    { value: 1000, suffix: "+", label: "Google Reviews" },
+    { value: 14, suffix: "", label: "Years Experience" },
   ];
 
   const reviews = [
@@ -55,6 +56,42 @@ const UsersReview = () => {
   const visibleReviews =
     isMobile && !showMore ? reviews.slice(0, 2) : reviews;
 
+  // Counter animation component
+  const Counter = ({ target, suffix, isDecimal }) => {
+    const controls = useAnimation();
+    const [ref, inView] = useInView({ triggerOnce: true });
+    const [value, setValue] = useState(0);
+
+    useEffect(() => {
+      if (inView) {
+        let start = 0;
+        const end = target;
+        const duration = 1500; // 1.5s
+        const stepTime = 30; // update every 30ms
+        let increment = (end - start) / (duration / stepTime);
+
+        let current = start;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= end) {
+            current = end;
+            clearInterval(timer);
+          }
+          setValue(isDecimal ? current.toFixed(1) : Math.floor(current));
+        }, stepTime);
+      }
+    }, [inView, target, isDecimal]);
+
+    return (
+      <div ref={ref}>
+        <h3 className="fw-bold">
+          {value}
+          {suffix}
+        </h3>
+      </div>
+    );
+  };
+
   return (
     <Container fluid className="py-5 bg-white text-center">
       <h2 className="fw-bold mb-5">CLIENT REVIEWS</h2>
@@ -68,7 +105,11 @@ const UsersReview = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.2, duration: 0.6 }}
             >
-              <h3 className="fw-bold">{s.value}</h3>
+              <Counter
+                target={s.value}
+                suffix={s.suffix}
+                isDecimal={s.isDecimal}
+              />
               <p className="text-muted">{s.label}</p>
             </motion.div>
           </Col>

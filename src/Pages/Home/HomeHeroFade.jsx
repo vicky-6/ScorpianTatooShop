@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
+import BookingForm from "../Appointment/BookingForm"; // <-- adjust path if needed
 
 const HomeHeroSection = () => {
   const images = [
@@ -15,6 +16,7 @@ const HomeHeroSection = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [showModal, setShowModal] = useState(false); // <-- modal state
 
   // Update window width on resize
   useEffect(() => {
@@ -39,7 +41,7 @@ const HomeHeroSection = () => {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      padding: isMobile ? "70px 15px" : "70px 60px",
+      padding: isMobile ? "70px 15px" : "70px 90px",
       minHeight: "100vh",
       backgroundColor: "#fff",
       overflow: "hidden",
@@ -58,7 +60,7 @@ const HomeHeroSection = () => {
       position: "relative",
       width: isMobile ? "100%" : "500px",
       height: isMobile ? "auto" : "500px",
-      aspectRatio: isMobile ? "3/4" : "auto", // keeps proportion on mobile
+      aspectRatio: isMobile ? "3/4" : "auto",
       borderRadius: "16px",
       overflow: "hidden",
       boxShadow: "0 8px 18px rgba(0,0,0,0.25)",
@@ -96,7 +98,7 @@ const HomeHeroSection = () => {
     },
     description: {
       fontSize: isMobile ? "0.95rem" : "1rem",
-      lineHeight: "1.6",
+      lineHeight: "2",
       marginBottom: "20px",
       color: "#444",
       padding: isMobile ? "0 10px" : "0",
@@ -117,7 +119,7 @@ const HomeHeroSection = () => {
   };
 
   return (
-    <section style={styles.heroSection}>
+    <section className="mt-5" style={styles.heroSection}>
       {/* Left Side - Rotating Single Image */}
       <div style={styles.left}>
         <div style={styles.imageWrapper}>
@@ -143,6 +145,7 @@ const HomeHeroSection = () => {
         </p>
         <Button
           style={styles.button}
+          onClick={() => setShowModal(true)} // open modal
           onMouseEnter={(e) =>
             (e.currentTarget.style.background =
               "linear-gradient(90deg, #ff7e00, #ff0057)")
@@ -155,6 +158,16 @@ const HomeHeroSection = () => {
           BOOK CONSULTATION – IT’S FREE
         </Button>
       </div>
+
+      {/* Popup Booking Form */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Book Your Free Consultation</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <BookingForm onSubmitSuccess={() => setShowModal(false)} />
+        </Modal.Body>
+      </Modal>
     </section>
   );
 };

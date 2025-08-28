@@ -1,6 +1,7 @@
 import React from "react";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Row, Col, Image } from "react-bootstrap";
 import styled, { keyframes } from "styled-components";
+import { motion } from "framer-motion";
 
 // Animations
 const fadeInLeft = keyframes`
@@ -30,13 +31,13 @@ const BackgroundWrapper = styled.div`
   padding: 4rem 0;
   position: relative;
   overflow: hidden;
-  background-color: #f0f0f0; /* light grey */
+  background-color: #f0f0f0;
 `;
 
 const TextCol = styled(Col)`
-  padding: 1rem 3rem 1rem 3rem;
+  padding: 1rem 3rem;
   transition: transform 0.3s ease;
-  
+
   &:hover {
     transform: scale(1.02);
   }
@@ -46,14 +47,12 @@ const TextCol = styled(Col)`
     margin-bottom: 0.5rem;
     color: #000;
     font-weight: bold;
-    animation: ${fadeInLeft} 1s forwards;
   }
   h2 {
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
     color: #000;
-    animation: ${fadeInLeft} 1s 0.3s forwards;
   }
   p {
     font-size: 1rem;
@@ -61,7 +60,6 @@ const TextCol = styled(Col)`
     margin-bottom: 1.5rem;
     color: #000;
     font-weight: bold;
-    animation: ${fadeInUp} 1s 0.6s forwards;
   }
 `;
 
@@ -79,7 +77,6 @@ const StyledImage = styled(Image)`
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   transition: transform 0.5s ease, box-shadow 0.5s ease;
-  animation: ${zoomInTilt} 1s 0.4s forwards;
 
   &:hover {
     transform: scale(1.08) rotate(2deg);
@@ -105,31 +102,47 @@ const CeoTalk = () => {
       <Row className="align-items-center flex-wrap-reverse" style={{ margin: 0 }}>
         {/* Left Text Content */}
         <TextCol md={6}>
-          <h5>Hey!</h5>
-          <h2>I AM NIRMAL.</h2>
-          <p>
-            With 15 years of tattooing and business expertise, I helped build
-            and grow over 70+ students. In the constantly changing field of
-            tattooing, it is my mission to provide you with the skills to master
-            the art of tattooing and techniques that will drive your tattooing
-            journey and business growth.
-          </p>
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: false, amount: 0.3 }}
+          >
+            <h5>Hey!</h5>
+            <h2>I AM NIRMAL.</h2>
+            <p>
+              With 15 years of tattooing and business expertise, I helped build
+              and grow over 70+ students. In the constantly changing field of
+              tattooing, it is my mission to provide you with the skills to master
+              the art of tattooing and techniques that will drive your tattooing
+              journey and business growth.
+            </p>
+          </motion.div>
         </TextCol>
 
         {/* Right Image */}
-        <Col md={6} className="d-flex justify-content-center mb-4 mb-md-0" style={{ padding: 0 }}>
-          <StyledImageWrapper>
-            <StyledImage
-              src="/nirmalinsta.JPG"
-              alt="Tattoo Artist"
-              fluid
-            />
-            {/* Floating Particles */}
-            <Particle top="10%" left="10%" size="8px" duration="5s" delay="0s" />
-            <Particle top="30%" left="70%" size="12px" duration="6s" delay="1s" />
-            <Particle top="60%" left="50%" size="6px" duration="4s" delay="0.5s" />
-            <Particle top="80%" left="20%" size="10px" duration="7s" delay="0.2s" />
-          </StyledImageWrapper>
+        <Col
+          md={6}
+          className="d-flex justify-content-center mb-4 mb-md-0"
+          style={{ padding: 0 }}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+            exit={{ opacity: 0, scale: 0.8, rotate: -5 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: false, amount: 0.3 }}
+          >
+            <StyledImageWrapper>
+              <StyledImage src="/nirmalinsta.JPG" alt="Tattoo Artist" fluid />
+              {/* Floating Particles */}
+              <Particle top="10%" left="10%" size="8px" duration="5s" delay="0s" />
+              <Particle top="30%" left="70%" size="12px" duration="6s" delay="1s" />
+              <Particle top="60%" left="50%" size="6px" duration="4s" delay="0.5s" />
+              <Particle top="80%" left="20%" size="10px" duration="7s" delay="0.2s" />
+            </StyledImageWrapper>
+          </motion.div>
         </Col>
       </Row>
     </BackgroundWrapper>

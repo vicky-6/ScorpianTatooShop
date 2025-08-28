@@ -38,7 +38,7 @@ const Categories = () => {
   return (
     <>
       <Container fluid className="py-5 bg-white text-center">
-        <h2 className="fw-bold mb-5">TATTOO CATEGORIES</h2>
+        <h2 className="fw-bold mb-5 mt-5">TATTOO CATEGORIES</h2>
 
         <Row className="g-4 justify-content-center">
           {categories.slice(0, visibleCount).map((cat, i) => (
