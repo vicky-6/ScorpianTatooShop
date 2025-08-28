@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import styled, { keyframes } from "styled-components";
-import { FaWhatsapp, FaInstagram, FaEnvelope, FaPhone } from "react-icons/fa";
+import { FaWhatsapp, FaInstagram, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 
 // Floating animation for cards
 const float = keyframes`
@@ -43,7 +43,6 @@ const floatParticle = keyframes`
   100% { transform: translateY(0) translateX(0); opacity: 0.6; }
 `;
 
-// Styled Components
 const ContactSection = styled.section`
   position: relative;
   padding: 120px 20px;
@@ -59,12 +58,13 @@ const Particle = styled.div`
   position: absolute;
   width: ${(props) => props.size || "6px"};
   height: ${(props) => props.size || "6px"};
-  background: rgba(255, 255, 255, 0.7);
+  background: ${(props) => props.color || "rgba(255, 255, 255, 0.7)"};
   border-radius: 50%;
   top: ${(props) => props.top || "50%"};
   left: ${(props) => props.left || "50%"};
   animation: ${floatParticle} ${(props) => props.duration || "6s"} ease-in-out infinite;
   animation-delay: ${(props) => props.delay || "0s"};
+  transition: background 0.3s ease;
 `;
 
 const Canvas = styled.canvas`
@@ -170,6 +170,7 @@ const ContactUs = () => {
     vx: (Math.random() - 0.5) * 0.5,
     vy: (Math.random() - 0.5) * 0.5,
     size: Math.random() * 6 + 4,
+    color: "rgba(255,255,255,0.7)",
   }));
 
   useEffect(() => {
@@ -195,7 +196,7 @@ const ContactUs = () => {
         // Draw particle
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size / 2, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(255,255,255,0.7)";
+        ctx.fillStyle = p.color;
         ctx.fill();
 
         // Draw line to mouse if close
@@ -255,12 +256,24 @@ const ContactUs = () => {
     };
   }, [particles]);
 
+  // Particle color change on hover
+  const handleHover = (index) => {
+    particles.forEach((p, i) => {
+      const dx = p.x - window.innerWidth / 2;
+      const dy = p.y - window.innerHeight / 2;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 200) p.color = "rgba(255,255,255,1)";
+      else p.color = "rgba(255,255,255,0.7)";
+    });
+  };
+
+  const handleLeave = () => {
+    particles.forEach((p) => (p.color = "rgba(255,255,255,0.7)"));
+  };
+
   return (
     <ContactSection>
-      {/* Canvas for connecting lines and interactive effect */}
       <Canvas ref={canvasRef} />
-
-      {/* Floating particles */}
       {particles.map((p, index) => (
         <Particle
           key={index}
@@ -269,43 +282,51 @@ const ContactUs = () => {
           left={`${Math.random() * 100}%`}
           duration={`${Math.random() * 6 + 4}s`}
           delay={`${Math.random() * 5}s`}
+          color={p.color}
         />
       ))}
 
       <Title>Contact Us</Title>
 
-      <ContactGrid
-        ref={gridRef}
-        style={{ opacity: 0, transform: "translateY(50px)", transition: "all 0.8s ease" }}
-      >
+      <ContactGrid ref={gridRef} style={{ opacity: 0, transform: "translateY(50px)", transition: "all 0.8s ease" }}>
         <ContactCard
-          href="https://wa.me/your_number"
+          href="https://wa.me/8248429488"
           target="_blank"
           rel="noopener noreferrer"
+          onMouseEnter={handleHover}
+          onMouseLeave={handleLeave}
         >
           <FaWhatsapp />
           WhatsApp
         </ContactCard>
 
         <ContactCard
-          href="https://instagram.com/your_username"
+          href="https://instagram.com/vignesh_s_06"
           target="_blank"
           rel="noopener noreferrer"
+          onMouseEnter={handleHover}
+          onMouseLeave={handleLeave}
         >
           <FaInstagram />
           Instagram
         </ContactCard>
 
         <ContactCard
-          href="mailto:youremail@example.com"
+          href="https://www.google.com/maps/dir/SCORPION+TATTOO+STUDIO+@+TRAINING+ACADEMY+@+LASER+TATTOO+REMOVAL,+Periyandavar+kulathu+street,+Jeevan+Theater+Line,+vpr+clinic,+Ammankulam,+Bodinayakanur,+Tamil+Nadu/Periyandavar+kulathu+street,+Jeevan+Theater+Line,+near+vpr+clinic,+Ammankulam,+Bodinayakanur,+Tamil+Nadu+625513/@10.0102571,77.3080467,10959m/data=!3m2!1e3!4b1!4m13!4m12!1m5!1m1!1s0x3b070d87915ade1d:0xf9999c251cf0f7f7!2m2!1d77.3492469!2d10.0101751!1m5!1m1!1s0x3b070d87915ade1d:0xf9999c251cf0f7f7!2m2!1d77.3492469!2d10.0101751?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D"
           target="_blank"
           rel="noopener noreferrer"
+          onMouseEnter={handleHover}
+          onMouseLeave={handleLeave}
         >
-          <FaEnvelope />
-          Email
+          <FaMapMarkerAlt />
+          Location
         </ContactCard>
 
-        <ContactCard href="tel:+1234567890">
+        <ContactCard
+          href="tel:+918248429488"
+          onMouseEnter={handleHover}
+          onMouseLeave={handleLeave}
+        >
           <FaPhone />
           Call
         </ContactCard>
