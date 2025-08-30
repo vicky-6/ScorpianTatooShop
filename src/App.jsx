@@ -11,7 +11,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import PricePageMain from "./Pages/Prices/PricePageMain";
 // import NavbarModern from "./components/Navbar/ModernNavbar";
 import CustomNavbar from "./components/Navbar/SoftNavbar";
-import ContactUs from "./Pages/contacts/ContactuU";
+import ContactUs from "./Pages/contacts/ContactUsOne";
 
 function App() {
   return (

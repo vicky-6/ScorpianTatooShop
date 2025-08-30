@@ -31,7 +31,7 @@ const BackgroundWrapper = styled.div`
   padding: 4rem 0;
   position: relative;
   overflow: hidden;
-  background-color: #f0f0f0;
+  background-color: #a15757ff;
 `;
 
 const TextCol = styled(Col)`

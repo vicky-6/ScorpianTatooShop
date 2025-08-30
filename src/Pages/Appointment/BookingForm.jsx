@@ -80,13 +80,13 @@ const BookingForm = () => {
     container: {
       minHeight: "100vh",
       padding: "2rem",
-      background: "#f0f2f5",
+      background: "#a15757ff",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
     },
     form: {
-      background: "#ffffff",
+      background: "black",
       padding: "2.5rem",
       borderRadius: "16px",
       color: "#333",

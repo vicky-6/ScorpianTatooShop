@@ -3,13 +3,13 @@ import { Container, Row, Col, Button, Image } from 'react-bootstrap';
 
 const AppointmentHero = () => {
   return (
-    <Container fluid className="py-5 bg-light overflow-hidden">
+    <Container fluid className="py-4 bg-light overflow-hidden">
       <Row className="align-items-center flex-wrap-reverse py-5">
         {/* Left Content */}
         <Col
           xs={12}
           md={6}
-          className="text-center text-md-start px-4 mb-4 mb-md-0"
+          className="text-center text-md-start px-4 pt-4 mb-4 mb-md-0"
         >
           <h1 className="display-4 fw-bold mb-4 text-primary">
             Get Inked & Save Big!
