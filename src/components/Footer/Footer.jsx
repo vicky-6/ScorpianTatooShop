@@ -105,7 +105,7 @@ const Footer = () => {
             {/* Desktop: show always */}
             <div className="d-none d-lg-block">
               <p>Address: Near ZKM School, Bodinayakanur</p>
-              <p>Contact: +91 82484 29488</p>
+              <p>Contact: +91 93454 55748</p>
               <p>Timing: Mon-Sat (10am - 8pm)</p>
             </div>
           </Col>
