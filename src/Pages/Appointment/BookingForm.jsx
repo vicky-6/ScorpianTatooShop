@@ -75,7 +75,6 @@ const BookingForm = () => {
     setFormData({ name: "", email: "", phone: "", date: "", idea: "" });
   };
 
-  // Inline Styles
   const styles = {
     container: {
       minHeight: "100vh",

@@ -97,7 +97,7 @@ const Footer = () => {
                 }}
               >
                 <li style={styles.addressItem}>Address: Near ZKM School, Bodinayakanur</li>
-                <li style={styles.addressItem}>Contact: +91 82484 29488</li>
+                <li style={styles.addressItem}>Contact: +91 93454 55748</li>
                 <li style={styles.addressItem}>Timing: Mon-Sat (10am - 8pm)</li>
               </ul>
             </div>

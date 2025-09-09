@@ -12,6 +12,7 @@ import PricePageMain from "./Pages/Prices/PricePageMain";
 // import NavbarModern from "./components/Navbar/ModernNavbar";
 import CustomNavbar from "./components/Navbar/SoftNavbar";
 import ContactUs from "./Pages/contacts/ContactUsOne";
+// import Booking from "./components/Booking";
 
 function App() {
   return (
